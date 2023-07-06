@@ -1,0 +1,37 @@
+DATA:
+  benchmark: 'xcad'
+  datapath: /home/sty/XCAD/
+  classes: 1
+
+MODEL:
+  architecture: 'vggunet_saff_mult'#DRIVE use base
+  backbone: 'base' #vgg16 or base
+  in_ch: 1
+  steps: 3
+  use_fim: [True, True, True, True]
+  up: [True, True, True, True]
+  affinity: [[3,9,15], 3, 3, 3]
+  affinity_supervised: [True, False, False, False]
+  reduce_dim: False
+
+TRAIN:
+  logname: AFN_XCAD  #save log and model
+  train_gpu: [0]
+  start_epoch: 0
+  epochs: 1000
+  img_mode: crop
+  img_size: 256
+  nworker: 8
+  batch_size: 2  # batch size for training
+  batch_size_val: 1
+  evaluate: True
+  resume: False # path to latest checkpoint (default: False), set the path for True
+  optimizer: 'adam'
+  base_lr: 0.001
+  lr_update: True
+  lr_step: 500
+  ignore_label: 255
+  weight_decay: 0.0001
+  gamma: 0.9
+  momentum: 0.9
+  weight:
